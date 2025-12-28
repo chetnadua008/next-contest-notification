@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "Next Contest",
+    "version": "1.0.0",
+    "icons": {
+      "128": "images/Designer.png"
+    },
+    "description": "Get notified about upcoming coding contests from various platforms.",
+
+    "action": {
+      "default_popup": "/index.html"
+    }
+  }
