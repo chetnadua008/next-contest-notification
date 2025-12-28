@@ -59,4 +59,46 @@ async function getLatestContestInfo() {
 }
 
 
+async function insertContestsToDB(contests) {
 
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+
+        database: "my_database"
+    });
+
+    con.connect(err => {
+        if (err) throw err;
+        console.log("Connected to MySQL database!");
+
+
+        //delete past contests from db
+        con.query(`DELETE FROM contests WHERE contest_date < CURDATE()`, (err, result) => {
+            if (err) {
+                console.log("Error occurred while deleting contests");
+                throw err;
+            }
+            console.log(`Number of contests deleted: ${result.affectedRows}`);
+        });
+
+        const sql = `INSERT ignore INTO contests (contest_name, platform, contest_date, contest_time) 
+                     VALUES (?, 'Codeforces', ?, ?)`;
+
+        contests.forEach(contest => {
+            con.query(sql, [contest.contestName, contest.date, contest.time], (err, result) => {
+                if (err) {
+                    console.log("error");
+                    throw err;
+                }
+                // console.log(contest.date);
+                console.log(`Contest inserted/updated: ${contest.contestName}`);
+            });
+        });
+
+        con.end();
+    });
+}
+
+console.log('Codeforces started');
+module.exports = getLatestContestInfo;
