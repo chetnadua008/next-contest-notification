@@ -1,3 +1,5 @@
+//happen when user clicks on extension icon
+
 document.addEventListener('DOMContentLoaded', function () {
     // fetch api request to backend
     fetch('http://localhost:3000/getdata')
