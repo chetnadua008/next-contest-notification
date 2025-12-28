@@ -1,13 +1,7 @@
-const express = require('express');
-const cors = require('cors');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const mysql = require('mysql');
 const moment = require('moment-timezone');
-
-const app = express();
-const port = 3000;
-app.use(cors());
 
 
 async function getLatestContestInfo() {
